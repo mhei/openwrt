@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cat .jenkins/.config > .config
+scripts/feeds update packages
+scripts/feeds install -a -p packages
+make oldconfig
+make -j8 V=s
