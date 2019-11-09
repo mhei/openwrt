@@ -1078,7 +1078,7 @@ $(eval $(call KernelPackage,qcaspi))
 define KernelPackage/qcauart
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Qualcomm Atheros QCA7000 UART support
-  DEPENDS:=+kmod-qca7k +kmod-serdev-core @LINUX_4_19
+  DEPENDS:=+kmod-qca7k +kmod-serdev @LINUX_4_19
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/qualcomm/qcauart.ko
   KCONFIG:=CONFIG_QCA7000_UART
   AUTOLOAD:=$(call AutoProbe,qcauart)

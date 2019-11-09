@@ -1232,18 +1232,21 @@ endef
 $(eval $(call KernelPackage,it87-wdt))
 
 
-define KernelPackage/serdev-core
+define KernelPackage/serdev
   SUBMENU:=$(OTHER_MENU)
-  TITLE:=Serial device bus core support
+  TITLE:=Serial device bus support
+  HIDDEN:=1
   DEPENDS:=@LINUX_4_19
-  KCONFIG:= \
-	CONFIG_SERIAL_DEV_BUS \
-	CONFIG_SERIAL_DEV_CTRL_TTYPORT=n
-  FILES:=$(LINUX_DIR)/drivers/tty/serdev/core.ko
+  KCONFIG:=CONFIG_SERIAL_DEV_BUS
+  FILES:=$(LINUX_DIR)/drivers/tty/serdev/serdev.ko
 endef
 
-define KernelPackage/serdev-core/description
-  Kernel module for core support for devices connected via a serial port
+define KernelPackage/serdev/description
+  Kernel module for support for (usually internal) devices connected via
+  a serial port (aka UART) to the SoC.
+
+  Note: This package is hidden since it may confuse people which only
+  want to connect normal external serial devices to the system.
 endef
 
-$(eval $(call KernelPackage,serdev-core))
+$(eval $(call KernelPackage,serdev))
