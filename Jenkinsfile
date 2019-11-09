@@ -25,6 +25,6 @@ node {
     }
 
     stage('Build') {
-        sh 'make -j8 V=s || make -j1 =Vs'
+        sh 'make -j8 V=s || make -j1 V=s'
     }
 }
