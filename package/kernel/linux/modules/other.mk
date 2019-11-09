@@ -1236,10 +1236,10 @@ define KernelPackage/serdev-core
   SUBMENU:=$(OTHER_MENU)
   TITLE:=Serial device bus core support
   DEPENDS:=@LINUX_4_19
-  KCONFIG:=CONFIG_SERIAL_DEV_BUS
-ifneq ($(wildcard $(LINUX_DIR)/drivers/tty/serdev/core.ko),)
+  KCONFIG:= \
+	CONFIG_SERIAL_DEV_BUS \
+	CONFIG_SERIAL_DEV_CTRL_TTYPORT=n
   FILES:=$(LINUX_DIR)/drivers/tty/serdev/core.ko
-endif
 endef
 
 define KernelPackage/serdev-core/description
@@ -1247,19 +1247,3 @@ define KernelPackage/serdev-core/description
 endef
 
 $(eval $(call KernelPackage,serdev-core))
-
-
-define KernelPackage/serdev-ttyport
-  SUBMENU:=$(OTHER_MENU)
-  TITLE:=Serial device TTY port controller support
-  DEPENDS:=+kmod-serdev-core @LINUX_4_19
-  KCONFIG:= \
-	CONFIG_SERIAL_DEV_BUS=y \
-	CONFIG_SERIAL_DEV_CTRL_TTYPORT=y
-endef
-
-define KernelPackage/serdev-ttyport/description
-  Kernel module for serial device TTY port controller support
-endef
-
-$(eval $(call KernelPackage,serdev-ttyport))

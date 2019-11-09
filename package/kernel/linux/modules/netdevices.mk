@@ -1064,10 +1064,7 @@ define KernelPackage/qcaspi
   TITLE:=Qualcomm Atheros QCA7000 SPI support
   DEPENDS:=+kmod-qca7k
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/qualcomm/qcaspi.ko
-  KCONFIG:= \
-	CONFIG_QCA7000_SPI \
-	CONFIG_SPI=y \
-	CONFIG_SPI_MASTER=y
+  KCONFIG:=CONFIG_QCA7000_SPI
   AUTOLOAD:=$(call AutoProbe,qcaspi)
 endef
 
@@ -1081,7 +1078,7 @@ $(eval $(call KernelPackage,qcaspi))
 define KernelPackage/qcauart
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Qualcomm Atheros QCA7000 UART support
-  DEPENDS:=+kmod-qca7k +kmod-serdev-ttyport @LINUX_4_19
+  DEPENDS:=+kmod-qca7k +kmod-serdev-core @LINUX_4_19
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/qualcomm/qcauart.ko
   KCONFIG:=CONFIG_QCA7000_UART
   AUTOLOAD:=$(call AutoProbe,qcauart)
