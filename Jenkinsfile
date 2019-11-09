@@ -2,7 +2,7 @@ node {
     checkout scm
 
     stage('Tidy Up') {
-        sh 'make distclean'
+        sh 'make dirclean'
     }
 
     stage('Configure') {
